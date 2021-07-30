@@ -11,6 +11,7 @@ app.use(morgan('dev'))
 
 require('./config/db')
 app.use(express.json())
+app.use('/public',express.static('public'))
 
 
 

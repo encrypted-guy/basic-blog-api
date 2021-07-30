@@ -1,10 +1,8 @@
 const router = require('express').Router()
 const Post = require('../model/Post')
 
-
 // GET ALL POSTS
 router.get('/posts', async (req, res) => {
-    // res.json({"hello": "hello"})
     try {
         const posts = await Post.find()
         res.status(200).json({
@@ -64,6 +62,22 @@ router.put('/update/:id', async (req, res) => {
 })
 
 
-
+// DELETE A POST
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const post  = await Post.findByIdAndDelete(req.params.id)
+        if(!post) return res.status(400).json({success: false})
+        res.status(200).json({
+            success: true,
+            data: {}
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(400).json({
+            success: false,
+            msg: 'failed delete request | ', err
+        })
+    }
+})
 
 module.exports = router
