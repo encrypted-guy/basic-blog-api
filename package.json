@@ -1,0 +1,20 @@
+{
+  "name": "nodejs_CRUD-AUTH_API",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.4",
+    "morgan": "^1.10.0"
+  }
+}
