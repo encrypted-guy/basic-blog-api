@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const Post = require('../model/Post')
 
+const upload = require('../middleware/Upload')
+
 // GET ALL POSTS
 router.get('/posts', async (req, res) => {
     try {
@@ -36,6 +38,36 @@ router.post('/add', async (req, res) => {
     }
 })
 
+// ADD AND UPDATE PHOTOS
+router.put('/photo/:id', upload.single('file'), async (req, res) => {
+    try {
+        if(!req.file) {
+            return res.status(400).json({
+                success: false,
+                msg: 'no file selected'
+            })
+        }else {
+            const Image = {photo: req.file.path}
+            const post = await Post.findByIdAndUpdate(req.params.id, Image, {
+                new: true,
+                runValidators: true
+            })
+            
+            if(!post) return res.status(400).json({success: false})
+            
+            res.status(200).json({
+                success: true,
+                data: post
+            })
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(400).json({
+            success: false,
+            msg: 'cant update / upload photo ', err
+        })
+    }
+})
 
 // UPDATE A POST
 router.put('/update/:id', async (req, res) => {
