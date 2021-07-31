@@ -14,12 +14,9 @@ app.use(express.json())
 app.use('/public',express.static('public'))
 
 
-
-
 // ROUTES
 app.use('/api/v1', require('./routes/posts'))
-
-
+app.use('/api/v1', require('./routes/user'))
 
 
 

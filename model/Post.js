@@ -11,6 +11,11 @@ const PostSchema = new mongoose.Schema({
         type: String,
         default: '/public/uploads/default.jpg'
     },
+    created_by: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
+        required: true
+    },
     created_AT: {
         type: Date,
         default: new Date()
