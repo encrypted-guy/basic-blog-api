@@ -83,7 +83,6 @@ router.post('/login', async (req, res) => {
 
 router.get('/user', auth, async (req, res) => {
     try {
-        console.log(req.user)
         const user = await User.findById(req.user.id)
         res.status(200).json({
             success: true,
